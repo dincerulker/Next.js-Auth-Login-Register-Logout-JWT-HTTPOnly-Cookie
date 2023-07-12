@@ -2,7 +2,6 @@
 import axios, { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
-// import { registerUser }  from "../dashboard/layout"; // Layout içindeki registerUser fonksiyonunu import ediyoruz
 
 function RegisterForm() {
     const [email, setemail] = useState("");
@@ -72,11 +71,6 @@ function RegisterForm() {
             throw error;
         }
     }
-
-    // Use the function
-    // fetchUser('your-access-token')
-    //     .then(user => console.log(user))
-    //     .catch(error => console.error(error));
     
 
     async function handleRegister() {
@@ -89,8 +83,7 @@ function RegisterForm() {
         }
         push('/dashboard');
 
-        console.log("Kayıt başarılı. Kullanıcı:", user);
-        // Başarılı kayıt durumunda yapılması gereken işlemler...
+        // console.log("Kayıt başarılı. Kullanıcı:", user);
     }
 
     return (
