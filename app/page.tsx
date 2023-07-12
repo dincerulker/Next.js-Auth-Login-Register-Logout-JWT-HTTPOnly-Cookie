@@ -17,7 +17,7 @@ export default function Home() {
       setIsLoggedIn(true);
       push("/dashboard");
     }
-  }, []);
+  }, [push]);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
