@@ -12,7 +12,7 @@ function ResetPassword() {
 
         const payload = {
             email: event.currentTarget.email.value,
-            passwordResetToken: Number(event.currentTarget.otp.value),
+            passwordResetToken: Number(event.currentTarget.passwordResetToken.value),
             password: event.currentTarget.password.value,
         };
 
@@ -67,7 +67,7 @@ function ResetPassword() {
                 <div>
                     <label htmlFor="passwordResetToken">Otp:</label>
                     <input
-                        type="number"
+                        type="text"
                         id="passwordResetToken"
                         name="passwordResetToken"
                         required

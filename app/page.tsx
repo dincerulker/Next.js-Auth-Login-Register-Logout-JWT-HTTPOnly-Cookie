@@ -1,11 +1,23 @@
-"use client";
+"use client"
 
 import axios, { AxiosError } from "axios";
+import Cookies from "js-cookie";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export default function Home() {
   const { push } = useRouter();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const accessToken = Cookies.get("accessToken");
+
+    if (accessToken) {
+      setIsLoggedIn(true);
+      push("/dashboard");
+    }
+  }, []);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -17,31 +29,32 @@ export default function Home() {
 
     try {
       const { data, status } = await axios.post("https://pushouseinternal.fcanmekikoglu.repl.co/auth/login", payload);
-      
-      if(status === 201){
-        setAuthCookies(data.accessToken, data.refreshToken);
-        push("/dashboard");        
-      }
-     
-      alert('Logged In !');
 
+      if (status === 201) {
+        setAuthCookies(data.accessToken, data.refreshToken);
+        push("/dashboard");
+      }
+
+      alert('Logged In!');
     } catch (e) {
       const error = e as AxiosError;
       alert(error.message);
     }
   };
-  
-
-  let currentDate = new Date();
-
-  const accessTokenExpiresAt = currentDate.setDate(currentDate.getDate() + 3);
-  const refreshTokenExpiresAt = currentDate.setDate(currentDate.getDate() + 7);
 
   const setAuthCookies = (accessToken: string, refreshToken: string) => {
+    let currentDate = new Date();
+    const accessTokenExpiresAt = currentDate.setDate(currentDate.getDate() + 3);
+    const refreshTokenExpiresAt = currentDate.setDate(currentDate.getDate() + 7);
+
     // AccessToken cookie'yi yazdırma
     document.cookie = `accessToken=${accessToken}; expires=${new Date(accessTokenExpiresAt).toUTCString()}; path=/;`;
     // RefreshToken cookie'yi yazdırma
     document.cookie = `refreshToken=${refreshToken}; expires=${new Date(refreshTokenExpiresAt).toUTCString()}; path=/;`;
+  };
+
+  if (isLoggedIn) {
+    return null; // Eğer kullanıcı giriş yapmışsa, formu gösterme
   }
 
   return (
