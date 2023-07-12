@@ -27,6 +27,7 @@ function RegisterForm() {
             console.log(user)
 
             setAuthCookies(response.data.accessToken, response.data.refreshToken);
+            
             return {
                 user: response.data,
                 error: null,
@@ -86,6 +87,7 @@ function RegisterForm() {
             alert("Kullanıcı kayıt olamadı")
             return;
         }
+        push('/dashboard');
 
         console.log("Kayıt başarılı. Kullanıcı:", user);
         // Başarılı kayıt durumunda yapılması gereken işlemler...
