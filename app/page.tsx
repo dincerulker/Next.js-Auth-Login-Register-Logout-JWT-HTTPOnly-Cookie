@@ -1,6 +1,7 @@
 "use client";
 
 import axios, { AxiosError } from "axios";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 export default function Home() {
@@ -49,7 +50,7 @@ export default function Home() {
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         <div>
-          <label htmlFor="email">email:</label>
+          <label htmlFor="email">Email:</label>
           <input
             type="text"
             id="email"
@@ -76,6 +77,11 @@ export default function Home() {
           Submit
         </button>
       </form>
+      <div>
+        <Link style={{ color: "yellow", backgroundColor: "black" }} className="bg-yellow" href='/forgot-password'>
+          Forgot Password
+        </Link>
+      </div>
     </main>
   );
 }
