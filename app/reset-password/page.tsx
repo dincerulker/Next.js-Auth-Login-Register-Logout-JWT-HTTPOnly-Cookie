@@ -12,7 +12,7 @@ function ResetPassword() {
 
         const payload = {
             email: event.currentTarget.email.value,
-            otp: event.currentTarget.otp.value,
+            passwordResetToken: Number(event.currentTarget.otp.value),
             password: event.currentTarget.password.value,
         };
 
@@ -23,6 +23,7 @@ function ResetPassword() {
                 setAuthCookies(data.accessToken, data.refreshToken);
                 push("/dashboard");
             }
+            
 
             alert('Şifreniz sıfırlandı.');
 
@@ -30,6 +31,9 @@ function ResetPassword() {
             const error = e as AxiosError;
             alert(error.message);
         }
+
+        console.log(payload)
+
     };
 
 
@@ -61,11 +65,11 @@ function ResetPassword() {
                     />
                 </div>
                 <div>
-                    <label htmlFor="otp">Password:</label>
+                    <label htmlFor="passwordResetToken">Otp:</label>
                     <input
                         type="number"
-                        id="otp"
-                        name="otp"
+                        id="passwordResetToken"
+                        name="passwordResetToken"
                         required
                         className="border rounded border-black"
                     />
