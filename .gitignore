@@ -15,7 +15,6 @@ node_modules
 /.next/
 /out/
 
-next.config.js
 
 # production
 /build

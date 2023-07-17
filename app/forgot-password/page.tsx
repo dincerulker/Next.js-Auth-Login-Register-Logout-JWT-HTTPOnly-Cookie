@@ -17,7 +17,7 @@ function ForgotPassword() {
         };
 
         try {
-            const { status } = await axios.post("https://pushouseinternal.fcanmekikoglu.repl.co/auth/forgot-password", payload);
+            const { status } = await axios.post(process.env.API_URL_FORGOT_PASSWORD as string, payload);
 
             if (status === 201) {
                 push("/reset-password");

@@ -18,7 +18,7 @@ function ResetPassword() {
         };
 
         try {
-            const { data, status } = await axios.post("https://pushouseinternal.fcanmekikoglu.repl.co/auth/reset-password", payload);
+            const { data, status } = await axios.post(process.env.API_URL_RESET_PASSWORD as string, payload);
 
             if (status === 201) {
                 setAuthCookies(data.accessToken, data.refreshToken);
