@@ -8,6 +8,7 @@ const nextConfig = {
         API_URL_REGISTER: process.env.API_URL_REGISTER,
         API_URL_RESET_PASSWORD: process.env.API_URL_RESET_PASSWORD,
         API_URL_FORGOT_PASSWORD: process.env.API_URL_FORGOT_PASSWORD,
+        API_URL_REFRESH: process.env.API_URL_REFRESH,
         // ...
     },
 };

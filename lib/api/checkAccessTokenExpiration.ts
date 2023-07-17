@@ -18,7 +18,7 @@ export default function checkAccessTokenExpiration () {
         const fetchData = async () => {
             try {
                 const response = await axios.get(
-                    "https://pushouseinternal.fcanmekikoglu.repl.co/auth/refresh",
+                    process.env.API_URL_REFRESH as string,
                     {
                         headers: {
                             Authorization: `Bearer ${refreshToken}`,
