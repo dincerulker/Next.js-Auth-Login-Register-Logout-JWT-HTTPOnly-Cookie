@@ -7,7 +7,9 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import setAuthCookies from "@/lib/api/setAuthCookies";
 
+
 export default function Home() {
+ 
   const { push } = useRouter();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -47,6 +49,8 @@ export default function Home() {
   if (isLoggedIn) {
     return null; // Eğer kullanıcı giriş yapmışsa, formu gösterme
   }
+
+  console.log(process.env.USER_ID)
 
   return (
     <main>
