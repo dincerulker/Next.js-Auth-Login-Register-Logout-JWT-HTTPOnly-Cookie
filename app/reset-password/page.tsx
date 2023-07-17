@@ -33,8 +33,6 @@ function ResetPassword() {
             alert(error.message);
         }
 
-        console.log(payload)
-
     };
 
     return (
