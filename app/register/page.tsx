@@ -2,9 +2,10 @@
 import axios, { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
+import setAuthCookies from "@/lib/api/setAuthCookies";
 
 function RegisterForm() {
-    const [email, setemail] = useState("");
+    const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const { push } = useRouter();
 
@@ -13,10 +14,7 @@ function RegisterForm() {
         error: AxiosError | null;
     }
 
-    async function registerUser(
-        email: string,
-        password: string
-    ): Promise<UserResponse> {
+    async function registerUser(email: string,password: string): Promise<UserResponse> {
         try {
             const  response = await axios.post("https://pushouseinternal.fcanmekikoglu.repl.co/auth/signup", {
                 email,
@@ -41,19 +39,6 @@ function RegisterForm() {
             };
         }
     }
-
-    let currentDate = new Date();
-
-    const accessTokenExpiresAt = currentDate.setDate(currentDate.getDate() + 3);
-    const refreshTokenExpiresAt = currentDate.setDate(currentDate.getDate() + 7);
-
-    const setAuthCookies = (accessToken: string, refreshToken: string) => {
-        // AccessToken cookie'yi yazdırma
-        document.cookie = `accessToken=${accessToken}; expires=${new Date(accessTokenExpiresAt).toUTCString()}; path=/;`;
-        // RefreshToken cookie'yi yazdırma
-        document.cookie = `refreshToken=${refreshToken}; expires=${new Date(refreshTokenExpiresAt).toUTCString()}; path=/;`;
-    }
-
 
     async function fetchUser(accessToken : string) {
         try {
@@ -84,7 +69,6 @@ function RegisterForm() {
         if(user){
             push('/dashboard');
         }
-
         // console.log("Kayıt başarılı. Kullanıcı:", user);
     }
 
@@ -94,7 +78,7 @@ function RegisterForm() {
                 type="text"
                 placeholder="E-mail"
                 value={email}
-                onChange={(e) => setemail(e.target.value)}
+                onChange={(e) => setEmail(e.target.value)}
             />
             <input
                 type="password"
