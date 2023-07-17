@@ -81,7 +81,9 @@ function RegisterForm() {
             alert("Kullanıcı kayıt olamadı")
             return;
         }
-        push('/dashboard');
+        if(user){
+            push('/dashboard');
+        }
 
         // console.log("Kayıt başarılı. Kullanıcı:", user);
     }
