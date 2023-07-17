@@ -14,9 +14,11 @@ function RegisterForm() {
         error: AxiosError | null;
     }
 
+    const API_URL_REGISTER = process.env.API_URL_REGISTER
+
     async function registerUser(email: string,password: string): Promise<UserResponse> {
         try {
-            const  response = await axios.post("https://pushouseinternal.fcanmekikoglu.repl.co/auth/signup", {
+            const response = await axios.post(API_URL_REGISTER as string, {
                 email,
                 password,
             });

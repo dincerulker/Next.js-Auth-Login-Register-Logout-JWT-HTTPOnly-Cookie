@@ -10,7 +10,7 @@ export default async function getUserData(): Promise<UserResponse> {
     try {
         const accessToken = Cookies.get("accessToken");
         const response = await axios.get(
-            "https://pushouseinternal.fcanmekikoglu.repl.co/users/me",
+            process.env.API_URL_ME as string,
             {
                 headers: {
                     Authorization: `Bearer ${accessToken}`,

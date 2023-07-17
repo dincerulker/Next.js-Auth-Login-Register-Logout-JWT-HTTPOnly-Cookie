@@ -9,7 +9,7 @@ import setAuthCookies from "@/lib/api/setAuthCookies";
 
 
 export default function Home() {
- 
+
   const { push } = useRouter();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -30,8 +30,9 @@ export default function Home() {
       password: event.currentTarget.password.value,
     };
 
+
     try {
-      const { data, status } = await axios.post("https://pushouseinternal.fcanmekikoglu.repl.co/auth/login", payload);
+      const { data, status } = await axios.post(process.env.API_URL_LOGIN as string, payload);
 
       if (status === 201) {
         setAuthCookies(data.accessToken, data.refreshToken);
@@ -49,8 +50,6 @@ export default function Home() {
   if (isLoggedIn) {
     return null; // Eğer kullanıcı giriş yapmışsa, formu gösterme
   }
-
-  console.log(process.env.USER_ID)
 
   return (
     <main>
