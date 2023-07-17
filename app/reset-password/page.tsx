@@ -3,6 +3,7 @@
 import axios, { AxiosError } from 'axios';
 import { useRouter } from "next/navigation";
 import React from 'react'
+import setAuthCookies from '@/lib/api/setAuthCookies';
 
 function ResetPassword() {
     const { push } = useRouter();
@@ -35,19 +36,6 @@ function ResetPassword() {
         console.log(payload)
 
     };
-
-
-    let currentDate = new Date();
-
-    const accessTokenExpiresAt = currentDate.setDate(currentDate.getDate() + 3);
-    const refreshTokenExpiresAt = currentDate.setDate(currentDate.getDate() + 7);
-
-    const setAuthCookies = (accessToken: string, refreshToken: string) => {
-        // AccessToken cookie'yi yazdırma
-        document.cookie = `accessToken=${accessToken}; expires=${new Date(accessTokenExpiresAt).toUTCString()}; path=/;`;
-        // RefreshToken cookie'yi yazdırma
-        document.cookie = `refreshToken=${refreshToken}; expires=${new Date(refreshTokenExpiresAt).toUTCString()}; path=/;`;
-    }
 
     return (
         <main>

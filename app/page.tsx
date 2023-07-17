@@ -5,6 +5,7 @@ import Cookies from "js-cookie";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import setAuthCookies from "@/lib/api/setAuthCookies";
 
 export default function Home() {
   const { push } = useRouter();
@@ -42,16 +43,6 @@ export default function Home() {
     }
   };
 
-  const setAuthCookies = (accessToken: string, refreshToken: string) => {
-    let currentDate = new Date();
-    const accessTokenExpiresAt = currentDate.setDate(currentDate.getDate() + 3);
-    const refreshTokenExpiresAt = currentDate.setDate(currentDate.getDate() + 7);
-
-    // AccessToken cookie'yi yazdırma
-    document.cookie = `accessToken=${accessToken}; expires=${new Date(accessTokenExpiresAt).toUTCString()}; path=/;`;
-    // RefreshToken cookie'yi yazdırma
-    document.cookie = `refreshToken=${refreshToken}; expires=${new Date(refreshTokenExpiresAt).toUTCString()}; path=/;`;
-  };
 
   if (isLoggedIn) {
     return null; // Eğer kullanıcı giriş yapmışsa, formu gösterme
@@ -93,6 +84,11 @@ export default function Home() {
       <div>
         <Link style={{ color: "yellow", backgroundColor: "black" }} className="bg-yellow" href='/forgot-password'>
           Forgot Password
+        </Link>
+      </div>
+      <div>
+        <Link style={{ color: "yellow", backgroundColor: "black" }} className="bg-yellow" href='/register'>
+          Register
         </Link>
       </div>
     </main>
