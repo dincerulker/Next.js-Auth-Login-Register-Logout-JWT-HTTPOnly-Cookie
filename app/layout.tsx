@@ -4,34 +4,10 @@ import './globals.css'
 import { useEffect, useState } from 'react'
 import { useRouter } from "next/navigation";
 import { Inter } from 'next/font/google'
-import axios from 'axios'
-import Cookies from 'js-cookie'
+import getUserData from '../lib/api/getUser'
 
 const inter = Inter({ subsets: ['latin'] })
 
-interface UserResponse {
-  user: string | null;
-  error: any | null; // Updated type for error
-}
-
-async function getUser(): Promise<UserResponse> {
-  try {
-    const accessToken = Cookies.get("accessToken");
-    const response = await axios.get(
-      "https://pushouseinternal.fcanmekikoglu.repl.co/users/me",
-      {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      }
-    );
-
-    return { user: response.data, error: null };
-  } catch (error) {
-    console.error("Error fetching user:", error);
-    return { user: null, error: error }; // Removed the type casting
-  }
-}
 
 export default function RootLayout({
   children,
@@ -44,7 +20,7 @@ export default function RootLayout({
 
   useEffect(() => {
     (async () => {
-      const { user } = await getUser();
+      const { user } = await getUserData();
 
       if (user) {
         push('/dashboard');
